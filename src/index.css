@@ -4,7 +4,7 @@
 
 @layer base {
   .dark {
-    background-color: #18181a;
+    background-color: black;
   }
 
   button:not(:disabled) {
