@@ -11,10 +11,8 @@ export default function useCreateForm() {
       return createForm(values.name, values.description);
     },
     onSuccess: (id: string) => {
-      navigate(`/forms/${id}`, { replace: true });
-    },
-    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["forms"] });
+      navigate(`/forms/${id}`, { replace: true });
     },
   });
 }

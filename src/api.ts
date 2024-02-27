@@ -1,4 +1,3 @@
-import { redirect } from "react-router-dom";
 import { JsonList } from "formity";
 
 import constants from "src/constants";
@@ -22,8 +21,8 @@ export async function getForm(
 ): Promise<{ name: string; form: JsonList }> {
   const response = await fetch(`${constants.apiUrl}/forms/id?id=${id}`);
   const form = await response.json();
-  if (!form) throw redirect("/");
-  return form;
+  if (form) return form;
+  throw new Error("Form not found");
 }
 
 /**

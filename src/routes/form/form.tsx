@@ -37,7 +37,7 @@ export default function FormRoute() {
     deleteForm.mutate();
   }
 
-  function handleSubmitError() {
+  function handleError() {
     setError(true);
   }
 
@@ -67,7 +67,7 @@ export default function FormRoute() {
         <Formity
           form={data.form}
           onSubmit={handleSubmit}
-          onSubmitError={handleSubmitError}
+          onError={handleError}
         />
       </Center>
     </Flex>
