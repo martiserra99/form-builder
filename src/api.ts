@@ -56,9 +56,9 @@ export async function modifyForm(
   name: string,
   description: string
 ): Promise<void> {
-  await fetch(`${constants.apiUrl}/forms/${id}`, {
+  await fetch(`${constants.apiUrl}/forms/id`, {
     method: "put",
-    body: JSON.stringify({ name, description }),
+    body: JSON.stringify({ id, name, description }),
     headers: { "Content-Type": "application/json" },
   });
 }
@@ -68,5 +68,9 @@ export async function modifyForm(
  * @param id The id of the form.
  */
 export async function deleteForm(id: string): Promise<void> {
-  await fetch(`${constants.apiUrl}/forms/${id}`, { method: "delete" });
+  await fetch(`${constants.apiUrl}/forms/id`, {
+    method: "delete",
+    body: JSON.stringify({ id }),
+    headers: { "Content-Type": "application/json" },
+  });
 }
