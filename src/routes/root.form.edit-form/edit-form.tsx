@@ -9,7 +9,10 @@ import TextArea from "src/components/form/text-area";
 import Button from "src/components/button";
 import Center from "src/components/center";
 
-import { FormValues } from "src/types";
+interface FormValues {
+  name: string;
+  description: string;
+}
 
 export default function EditFormRoute() {
   const name = useLoaderData() as string;

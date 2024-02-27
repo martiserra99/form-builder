@@ -1,9 +1,11 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 
-import { deleteForm } from "src/modules/storage";
+import { deleteForm } from "src/api";
 
-export default async function formAction({ params }: ActionFunctionArgs) {
-  const slug = params.slug as string;
-  deleteForm(slug);
+export default async function formAction({
+  params,
+}: ActionFunctionArgs): Promise<Response> {
+  const id = params.id as string;
+  await deleteForm(id);
   return redirect("/");
 }

@@ -57,14 +57,14 @@ const router = createBrowserRouter([
         action: newFormAction,
       },
       {
-        path: "forms/:slug",
+        path: "forms/:id",
         element: <FormRoute />,
         errorElement: <FormRouteError />,
         loader: formLoader,
         action: formAction,
       },
       {
-        path: "forms/:slug/edit",
+        path: "forms/:id/edit",
         element: <EditFormRoute />,
         loader: editFormLoader,
         action: editFormAction,
