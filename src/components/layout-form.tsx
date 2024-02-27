@@ -17,7 +17,7 @@ function LayoutForm({
   buttons,
 }: LayoutFormProps): JSX.Element {
   return (
-    <Card size="3" variant="surface" className="w-96 max-w-96">
+    <Card size="3" variant="surface" className="w-full max-w-[680px]">
       <Heading size="3" trim="both">
         {heading}
       </Heading>

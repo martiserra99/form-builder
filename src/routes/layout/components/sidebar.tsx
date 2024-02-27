@@ -9,7 +9,7 @@ import useForms from "src/hooks/use-forms";
 export default function Sidebar() {
   const { data } = useForms();
   return (
-    <Flex direction="row" height="100%" className="w-64">
+    <Flex direction="row" height="100%" className="w-full max-w-[480px]">
       <Box p="3" grow="1">
         <Button asChild size="2" variant="surface" className="w-full">
           <Link to="/">

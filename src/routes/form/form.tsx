@@ -69,6 +69,7 @@ export default function FormRoute() {
           form={data.form}
           onSubmit={handleSubmit}
           onError={handleError}
+          className="w-full max-w-[680px]"
         />
       </Center>
     </Flex>

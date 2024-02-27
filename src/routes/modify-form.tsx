@@ -41,7 +41,10 @@ export default function ModifyFormRoute() {
 
   return (
     <Center className="w-full h-full">
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="w-full max-w-[680px]"
+      >
         <FormProvider {...form}>
           <LayoutForm
             heading="Modify the form"
