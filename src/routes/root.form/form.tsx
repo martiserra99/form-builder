@@ -1,29 +1,21 @@
 import { Value } from "formity";
 import { useState } from "react";
-import { useFetcher } from "react-router-dom";
+import { useFetcher, useSubmit } from "react-router-dom";
 
 import Form from "./components/form";
-import Thanks from "./components/thanks";
 
 export default function FormRoute() {
-  const [data, setData] = useState<Value>(null);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<unknown>(null);
 
+  const submit = useSubmit();
   const fetcher = useFetcher();
 
   function handleSubmit(data: Value) {
-    setData(data);
-    setSubmitted(true);
-  }
-
-  function handleRestart() {
-    setData(null);
-    setSubmitted(false);
+    submit(data, { method: "post", encType: "application/json" });
   }
 
   function handleDelete() {
-    fetcher.submit(null, { method: "post" });
+    fetcher.submit(null, { method: "delete" });
   }
 
   function handleSubmitError(error: unknown) {
@@ -32,10 +24,6 @@ export default function FormRoute() {
 
   if (error) {
     throw error;
-  }
-
-  if (submitted) {
-    return <Thanks data={data} onRestart={handleRestart} />;
   }
 
   return (

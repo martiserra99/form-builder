@@ -74,3 +74,31 @@ export async function deleteForm(id: string): Promise<void> {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+/**
+ * It creates form data.
+ * @param id The id of the form.
+ * @param data The data to be added to the form.
+ */
+export async function createFormData(id: string, data: unknown) {
+  const response = await fetch(`${constants.apiUrl}/forms/id/data`, {
+    method: "post",
+    body: JSON.stringify({ id, data }),
+    headers: { "Content-Type": "application/json" },
+  });
+  const json = await response.json();
+  return json.index;
+}
+
+/**
+ * It returns the form data.
+ * @param id The id of the form.
+ * @param index The index of the form data.
+ * @returns The form data.
+ */
+export async function getFormData(id: string, index: number) {
+  const response = await fetch(
+    `${constants.apiUrl}/forms/id/data/index?id=${id}&index=${index}`
+  );
+  return await response.json();
+}

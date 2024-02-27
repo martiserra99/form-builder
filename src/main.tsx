@@ -17,6 +17,7 @@ import FormRoute from "./routes/root.form/form";
 import FormRouteError from "./routes/root.form/form.error";
 import formLoader from "./routes/root.form/form.loader";
 import formAction from "./routes/root.form/form.action";
+import DataRoute from "./routes/root.form.data/data";
 import EditFormRoute from "./routes/root.form.edit-form/edit-form";
 import editFormLoader from "./routes/root.form.edit-form/edit-form.loader";
 import editFormAction from "./routes/root.form.edit-form/edit-form.action";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
         errorElement: <FormRouteError />,
         loader: formLoader,
         action: formAction,
+      },
+      {
+        path: "forms/:id/data/:index",
+        element: <DataRoute />,
       },
       {
         path: "forms/:id/edit",
