@@ -31,7 +31,7 @@ export default function SuccessMessage({
           .
         </>
       }
-      buttonIcon={<ReloadIcon />}
+      buttonIcon={<ReloadIcon className="w-8 h-8" />}
       buttonText={<>Restart</>}
       buttonOnClick={onRestart}
       buttonDisabled={false}

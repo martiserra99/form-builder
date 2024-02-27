@@ -16,11 +16,11 @@ export default function Header({ name, onDelete, deleting }: HeaderProps) {
         <Flex direction="row" justify="end" gap="3">
           <Button asChild variant="surface" disabled={deleting}>
             <Link to="modify" state={{ name }}>
-              <Pencil2Icon /> Edit
+              <Pencil2Icon className="w-8 h-8" /> Edit
             </Link>
           </Button>
           <Button variant="surface" onClick={onDelete} disabled={deleting}>
-            <Cross2Icon /> Delete
+            <Cross2Icon className="w-8 h-8" /> Delete
           </Button>
         </Flex>
       </Box>

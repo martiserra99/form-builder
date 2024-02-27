@@ -20,7 +20,7 @@ export default function ErrorMessage({
           create it again.
         </>
       }
-      buttonIcon={<Cross2Icon />}
+      buttonIcon={<Cross2Icon className="w-8 h-8" />}
       buttonText={<>Delete</>}
       buttonOnClick={onDelete}
       buttonDisabled={deleting}

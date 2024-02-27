@@ -21,8 +21,8 @@ function LayoutForm({
       <Heading size="3" trim="both">
         {heading}
       </Heading>
-      <Separator size="4" className="my-5" />
-      <Flex direction="column" gap="4" className="mb-5">
+      <Separator size="4" className="mt-10 mb-8" />
+      <Flex direction="column" gap="4" className="mb-8">
         {fields}
       </Flex>
       <Grid columns={`${buttons.length}`} gap="4">

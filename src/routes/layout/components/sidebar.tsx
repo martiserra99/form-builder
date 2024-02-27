@@ -13,7 +13,7 @@ export default function Sidebar() {
       <Box p="3" grow="1">
         <Button asChild size="2" variant="surface" className="w-full">
           <Link to="/">
-            <PlusIcon /> New Form
+            <PlusIcon className="w-8 h-8" /> New Form
           </Link>
         </Button>
         <Separator size="4" my="3" />
