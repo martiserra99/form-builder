@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LayoutRoute from "./routes/layout";
 import CreateFormRoute from "./routes/create-form";
 import FormRoute from "./routes/form/form";
-import ChangeFormRoute from "./routes/change-form/change-form";
+import ModifyFormRoute from "./routes/modify-form";
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
       <Route path="/" element={<LayoutRoute />}>
         <Route index element={<CreateFormRoute />} />
         <Route path="forms/:id" element={<FormRoute />} />
-        <Route path="forms/:id/modify" element={<ChangeFormRoute />} />
+        <Route path="forms/:id/modify" element={<ModifyFormRoute />} />
       </Route>
     </Routes>
   );

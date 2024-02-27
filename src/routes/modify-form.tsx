@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,21 +10,19 @@ import Button from "src/components/button";
 import Center from "src/components/center";
 import useChangeForm from "src/hooks/use-change-form";
 
-interface FormProps {
-  name: string;
-}
-
 interface FormValues {
   name: string;
   description: string;
 }
 
-export default function Form({ name }: FormProps) {
+export default function ModifyFormRoute() {
   const { id } = useParams() as { id: string };
+
+  const location = useLocation();
 
   const form = useForm<FormValues>({
     defaultValues: {
-      name: name,
+      name: location.state.name,
       description: "",
     },
     resolver: yupResolver(

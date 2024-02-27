@@ -14,7 +14,7 @@ export default function useDeleteForm(id: string) {
       navigate("/", { replace: true });
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["forms", id] });
+      queryClient.invalidateQueries({ queryKey: ["forms"] });
     },
   });
 }

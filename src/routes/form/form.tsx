@@ -56,18 +56,20 @@ export default function FormRoute() {
     );
   }
 
-  return (
+  return data ? (
     <Flex direction="column" width="100%" height="100%">
-      <Header onDelete={handleDelete} deleting={deleteForm.isPending} />
+      <Header
+        name={data.name}
+        onDelete={handleDelete}
+        deleting={deleteForm.isPending}
+      />
       <Center grow="1">
-        {data ? (
-          <Formity
-            form={data.form}
-            onSubmit={handleSubmit}
-            onSubmitError={handleSubmitError}
-          />
-        ) : null}
+        <Formity
+          form={data.form}
+          onSubmit={handleSubmit}
+          onSubmitError={handleSubmitError}
+        />
       </Center>
     </Flex>
-  );
+  ) : null;
 }

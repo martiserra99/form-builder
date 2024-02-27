@@ -10,11 +10,10 @@ export default function useChangeForm(id: string) {
     mutationFn: async (values: { name: string; description: string }) => {
       return changeForm(id, values.name, values.description);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ["forms"] });
+      await queryClient.refetchQueries({ queryKey: ["forms", id] });
       navigate(`/forms/${id}`, { replace: true });
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["forms", id] });
     },
   });
 }
