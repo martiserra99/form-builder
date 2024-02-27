@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import { JsonList } from "formity";
 
 import constants from "src/constants";
@@ -12,15 +13,17 @@ export async function getForms(): Promise<{ id: string; name: string }[]> {
 }
 
 /**
- * It returns the JsonList of a form by its id or null if the form does not exist.
+ * It returns the JsonList of a form by its id.
  * @param id The id of the form.
- * @returns The JsonList of the form or null if the form does not exist.
+ * @returns The JsonList of the form.
  */
 export async function getForm(
   id: string
-): Promise<{ name: string; form: JsonList } | null> {
-  const response = await fetch(`${constants.apiUrl}/forms/${id}`);
-  return await response.json();
+): Promise<{ name: string; form: JsonList }> {
+  const response = await fetch(`${constants.apiUrl}/forms/id?id=${id}`);
+  const form = await response.json();
+  if (!form) throw redirect("/");
+  return form;
 }
 
 /**
@@ -38,7 +41,8 @@ export async function createForm(
     body: JSON.stringify({ name, description }),
     headers: { "Content-Type": "application/json" },
   });
-  return await response.json();
+  const json = await response.json();
+  return json.id;
 }
 
 /**

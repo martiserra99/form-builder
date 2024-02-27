@@ -4,7 +4,7 @@ import { Text, TextField as RadixTextField } from "@radix-ui/themes";
 
 import Label from "src/components/label";
 import ErrorMessage from "src/components/error-message";
-import useNavigating from "src/hooks/use-navigating";
+import useSubmitting from "src/hooks/use-submitting";
 
 interface TextFieldProps {
   label: string; // The label for the text field
@@ -25,7 +25,7 @@ function TextField({
   placeholder,
 }: TextFieldProps): JSX.Element {
   const { control, formState } = useFormContext();
-  const isNavigating = useNavigating();
+  const isSubmitting = useSubmitting();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
     <Controller
@@ -46,7 +46,7 @@ function TextField({
             }}
             autoComplete="off"
             placeholder={placeholder}
-            disabled={isNavigating}
+            disabled={isSubmitting}
             {...(error && { color: "red" })}
           />
           {error && <ErrorMessage mt="1">{error.message}</ErrorMessage>}

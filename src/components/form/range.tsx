@@ -3,7 +3,7 @@ import { Flex, Text, Slider as RadixSlider } from "@radix-ui/themes";
 
 import Label from "src/components/label";
 import ErrorMessage from "src/components/error-message";
-import useNavigating from "src/hooks/use-navigating";
+import useSubmitting from "src/hooks/use-submitting";
 
 interface RangeProps {
   label: string; // The label for the range
@@ -28,7 +28,7 @@ function Range({
   minStepsBetweenThumbs = 1,
 }: RangeProps): JSX.Element {
   const { control, formState } = useFormContext();
-  const isNavigating = useNavigating();
+  const isSubmitting = useSubmitting();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
     <Controller
@@ -52,7 +52,7 @@ function Range({
             max={max}
             step={step}
             minStepsBetweenThumbs={minStepsBetweenThumbs}
-            disabled={isNavigating}
+            disabled={isSubmitting}
             {...(error && { color: "red" })}
           />
           {error && <ErrorMessage mt="1">{error.message}</ErrorMessage>}
