@@ -1,6 +1,6 @@
+import { useParams } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSubmit } from "react-router-dom";
 import * as yup from "yup";
 
 import LayoutForm from "src/components/layout-form";
@@ -8,16 +8,23 @@ import TextField from "src/components/form/text-field";
 import TextArea from "src/components/form/text-area";
 import Button from "src/components/button";
 import Center from "src/components/center";
+import useChangeForm from "src/hooks/use-change-form";
+
+interface FormProps {
+  name: string;
+}
 
 interface FormValues {
   name: string;
   description: string;
 }
 
-export default function NewFormRoute() {
+export default function Form({ name }: FormProps) {
+  const { id } = useParams() as { id: string };
+
   const form = useForm<FormValues>({
     defaultValues: {
-      name: "",
+      name: name,
       description: "",
     },
     resolver: yupResolver(
@@ -28,13 +35,10 @@ export default function NewFormRoute() {
     ),
   });
 
-  const submit = useSubmit();
+  const changeForm = useChangeForm(id);
 
-  function handleSubmit({ name, description }: FormValues) {
-    submit(
-      { name, description },
-      { method: "post", encType: "application/json" }
-    );
+  async function handleSubmit(values: FormValues) {
+    await changeForm.mutateAsync(values);
   }
 
   return (
@@ -42,7 +46,7 @@ export default function NewFormRoute() {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <FormProvider {...form}>
           <LayoutForm
-            heading="Create a new form"
+            heading="Modify the form"
             fields={[
               <TextField
                 key="name"
@@ -54,10 +58,10 @@ export default function NewFormRoute() {
                 key="description"
                 name="description"
                 label="Description"
-                placeholder="Form that asks the user what are his hobbies and for each hobby it asks why he likes it."
+                placeholder="Add a validation rule that checks that the number of hobbies is greater than 2."
               />,
             ]}
-            buttons={[<Button key="button">Create</Button>]}
+            buttons={[<Button key="button">Modify</Button>]}
           />
         </FormProvider>
       </form>

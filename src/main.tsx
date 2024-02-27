@@ -7,20 +7,8 @@ import "./theme-config.css";
 
 import { Theme } from "@radix-ui/themes";
 import { FormityProvider } from "formity";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import RootRoute from "./routes/root/root";
-import rootLoader from "./routes/root/root.loader";
-import NewFormRoute from "./routes/root.new-form/new-form";
-import newFormAction from "./routes/root.new-form/new-form.action";
-import FormRoute from "./routes/root.form/form";
-import FormRouteError from "./routes/root.form/form.error";
-import formLoader from "./routes/root.form/form.loader";
-import formAction from "./routes/root.form/form.action";
-import DataRoute from "./routes/root.form.data/data";
-import EditFormRoute from "./routes/root.form.edit-form/edit-form";
-import editFormLoader from "./routes/root.form.edit-form/edit-form.loader";
-import editFormAction from "./routes/root.form.edit-form/edit-form.action";
+import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import LayoutForm from "./components/layout-form";
 import TextField from "./components/form/text-field";
@@ -32,6 +20,8 @@ import Slider from "./components/form/slider";
 import Range from "./components/form/range";
 import Back from "./components/back";
 import Button from "./components/button";
+
+import App from "./app";
 
 const components = {
   LayoutForm,
@@ -46,43 +36,17 @@ const components = {
   Button,
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootRoute />,
-    loader: rootLoader,
-    children: [
-      {
-        index: true,
-        element: <NewFormRoute />,
-        action: newFormAction,
-      },
-      {
-        path: "forms/:id",
-        element: <FormRoute />,
-        errorElement: <FormRouteError />,
-        loader: formLoader,
-        action: formAction,
-      },
-      {
-        path: "forms/:id/data/:index",
-        element: <DataRoute />,
-      },
-      {
-        path: "forms/:id/edit",
-        element: <EditFormRoute />,
-        loader: editFormLoader,
-        action: editFormAction,
-      },
-    ],
-  },
-]);
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Theme appearance="dark" panelBackground="translucent">
       <FormityProvider components={components}>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </QueryClientProvider>
       </FormityProvider>
     </Theme>
   </React.StrictMode>

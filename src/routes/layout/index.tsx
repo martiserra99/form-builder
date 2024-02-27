@@ -5,7 +5,7 @@ import { Box, Flex } from "@radix-ui/themes";
 import Header from "./components/header";
 import Sidebar from "./components/sidebar";
 
-export default function RootRoute() {
+export default function LayoutRoute() {
   return (
     <Flex direction="column" className="h-screen">
       <Header />

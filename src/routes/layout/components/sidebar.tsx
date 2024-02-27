@@ -1,11 +1,13 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { Box, Flex, Separator, Button, Text } from "@radix-ui/themes";
-import { Link, useLoaderData, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { PlusIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
 
+import useForms from "src/hooks/use-forms";
+
 export default function Sidebar() {
-  const forms = useLoaderData() as { id: string; name: string }[];
+  const { data } = useForms();
   return (
     <Flex direction="row" height="100%" className="w-64">
       <Box p="3" grow="1">
@@ -15,15 +17,17 @@ export default function Sidebar() {
           </Link>
         </Button>
         <Separator size="4" my="3" />
-        <NavigationMenu.Root orientation="vertical">
-          <NavigationMenu.List>
-            {forms.map(({ id, name }) => (
-              <NavigationMenu.Item key={id}>
-                <NavLink to={`/forms/${id}`}>{name}</NavLink>
-              </NavigationMenu.Item>
-            ))}
-          </NavigationMenu.List>
-        </NavigationMenu.Root>
+        {data ? (
+          <NavigationMenu.Root orientation="vertical">
+            <NavigationMenu.List>
+              {data.map(({ id, name }) => (
+                <NavigationMenu.Item key={id}>
+                  <NavLink to={`/forms/${id}`}>{name}</NavLink>
+                </NavigationMenu.Item>
+              ))}
+            </NavigationMenu.List>
+          </NavigationMenu.Root>
+        ) : null}
       </Box>
       <Separator orientation="vertical" size="4" />
     </Flex>

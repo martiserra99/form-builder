@@ -5,19 +5,20 @@ import { Link } from "react-router-dom";
 
 interface HeaderProps {
   onDelete: () => void;
+  deleting: boolean;
 }
 
-export default function Header({ onDelete }: HeaderProps) {
+export default function Header({ onDelete, deleting }: HeaderProps) {
   return (
     <Box>
       <Box p="3">
         <Flex direction="row" justify="end" gap="3">
-          <Button asChild variant="surface">
-            <Link to="edit">
+          <Button asChild variant="surface" disabled={deleting}>
+            <Link to="modify">
               <Pencil2Icon /> Edit
             </Link>
           </Button>
-          <Button variant="surface" onClick={onDelete}>
+          <Button variant="surface" onClick={onDelete} disabled={deleting}>
             <Cross2Icon /> Delete
           </Button>
         </Flex>

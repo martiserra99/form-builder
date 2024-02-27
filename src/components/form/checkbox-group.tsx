@@ -3,7 +3,6 @@ import { Flex, Text, Checkbox as RadixCheckbox, Box } from "@radix-ui/themes";
 
 import Label from "src/components/label";
 import ErrorMessage from "src/components/error-message";
-import useSubmitting from "src/hooks/use-submitting";
 
 interface CheckboxGroupProps {
   label: string; // The label for the checkbox group
@@ -18,7 +17,6 @@ interface CheckboxGroupProps {
  */
 function CheckboxGroup({ label, name, list }: CheckboxGroupProps): JSX.Element {
   const { control, formState } = useFormContext();
-  const isSubmitting = useSubmitting();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
     <Controller
@@ -52,7 +50,6 @@ function CheckboxGroup({ label, name, list }: CheckboxGroupProps): JSX.Element {
                       }}
                       onBlur={field.onBlur}
                       ref={field.ref}
-                      disabled={isSubmitting}
                       {...(error && { color: "red" })}
                     />
                     {item.label}

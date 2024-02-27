@@ -3,7 +3,6 @@ import { Text, Select as RadixSelect } from "@radix-ui/themes";
 
 import Label from "src/components/label";
 import ErrorMessage from "src/components/error-message";
-import useSubmitting from "src/hooks/use-submitting";
 
 interface SelectProps {
   label: string; // The label for the select
@@ -18,7 +17,6 @@ interface SelectProps {
  */
 function Select({ label, name, list }: SelectProps): JSX.Element {
   const { control, formState } = useFormContext();
-  const isSubmitting = useSubmitting();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
     <Controller
@@ -38,7 +36,6 @@ function Select({ label, name, list }: SelectProps): JSX.Element {
               className="w-full"
               onBlur={field.onBlur}
               ref={field.ref}
-              disabled={isSubmitting}
             />
             <RadixSelect.Content position="popper">
               {list.map((item) => (

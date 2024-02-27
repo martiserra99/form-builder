@@ -1,6 +1,6 @@
-import { Button as RadixButton } from "@radix-ui/themes";
+import { useFormContext } from "react-hook-form";
 
-import useSubmitting from "src/hooks/use-submitting";
+import { Button as RadixButton } from "@radix-ui/themes";
 
 interface ButtonProps {
   children: string; // The button text
@@ -12,10 +12,15 @@ interface ButtonProps {
  * @returns {JSX.Element} The button component
  */
 function Button({ children }: ButtonProps): JSX.Element {
-  const isSubmitting = useSubmitting();
+  const { formState } = useFormContext();
   return (
-    <RadixButton type="submit" variant="solid" size="2" disabled={isSubmitting}>
-      {isSubmitting ? "Submitting..." : children}
+    <RadixButton
+      type="submit"
+      variant="solid"
+      size="2"
+      disabled={formState.isSubmitting}
+    >
+      {formState.isSubmitting ? "Submitting..." : children}
     </RadixButton>
   );
 }

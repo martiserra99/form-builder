@@ -1,25 +1,24 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLoaderData, useSubmit } from "react-router-dom";
 import * as yup from "yup";
 
 import LayoutForm from "src/components/layout-form";
 import TextField from "src/components/form/text-field";
 import TextArea from "src/components/form/text-area";
-import Button from "src/components/button";
 import Center from "src/components/center";
+import Button from "src/components/button";
+
+import useCreateForm from "src/hooks/use-create-form";
 
 interface FormValues {
   name: string;
   description: string;
 }
 
-export default function EditFormRoute() {
-  const name = useLoaderData() as string;
-
+export default function CreateFormRoute() {
   const form = useForm<FormValues>({
     defaultValues: {
-      name: name,
+      name: "",
       description: "",
     },
     resolver: yupResolver(
@@ -30,13 +29,10 @@ export default function EditFormRoute() {
     ),
   });
 
-  const submit = useSubmit();
+  const createForm = useCreateForm();
 
-  function handleSubmit({ name, description }: FormValues) {
-    submit(
-      { name, description },
-      { method: "post", encType: "application/json" }
-    );
+  async function handleSubmit(values: FormValues) {
+    await createForm.mutateAsync(values);
   }
 
   return (
@@ -44,7 +40,7 @@ export default function EditFormRoute() {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <FormProvider {...form}>
           <LayoutForm
-            heading="Edit the form"
+            heading="Create a new form"
             fields={[
               <TextField
                 key="name"
@@ -56,10 +52,10 @@ export default function EditFormRoute() {
                 key="description"
                 name="description"
                 label="Description"
-                placeholder="Add a validation rule that checks that the number of hobbies is greater than 2."
+                placeholder="Form that asks the user what are his hobbies and for each hobby it asks why he likes it."
               />,
             ]}
-            buttons={[<Button key="button">Edit</Button>]}
+            buttons={[<Button key="button">Create</Button>]}
           />
         </FormProvider>
       </form>

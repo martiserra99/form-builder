@@ -7,12 +7,14 @@ export default function Message({
   buttonText,
   buttonIcon,
   buttonOnClick,
+  buttonDisabled,
 }: {
   heading: React.ReactNode;
   text: React.ReactNode;
   buttonText: React.ReactNode;
   buttonIcon: React.ReactNode;
   buttonOnClick: () => void;
+  buttonDisabled: boolean;
 }) {
   return (
     <Center height="100%">
@@ -24,7 +26,7 @@ export default function Message({
           {text}
         </Text>
         <Flex direction="row" justify="center" align="center">
-          <Button onClick={buttonOnClick}>
+          <Button onClick={buttonOnClick} disabled={buttonDisabled}>
             {buttonIcon} {buttonText}
           </Button>
         </Flex>

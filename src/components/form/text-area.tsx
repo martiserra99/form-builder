@@ -4,7 +4,6 @@ import { Text, TextArea as RadixTextArea } from "@radix-ui/themes";
 
 import Label from "src/components/label";
 import ErrorMessage from "src/components/error-message";
-import useSubmitting from "src/hooks/use-submitting";
 
 interface TextAreaProps {
   label: string; // The label for the text area
@@ -19,7 +18,6 @@ interface TextAreaProps {
  */
 function TextArea({ label, name, placeholder }: TextAreaProps): JSX.Element {
   const { register, formState } = useFormContext();
-  const isSubmitting = useSubmitting();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
     <Text as="label" className="block w-full">
@@ -30,7 +28,6 @@ function TextArea({ label, name, placeholder }: TextAreaProps): JSX.Element {
         size="2"
         autoComplete="off"
         placeholder={placeholder}
-        disabled={isSubmitting}
         {...register(name)}
         {...(error && { color: "red" })}
       />

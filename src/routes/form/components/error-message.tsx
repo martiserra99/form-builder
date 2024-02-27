@@ -1,15 +1,16 @@
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { useSubmit } from "react-router-dom";
 
 import Message from "src/components/message";
 
-export default function FormRouteError() {
-  const submit = useSubmit();
+interface ErrorMessageProps {
+  onDelete: () => void;
+  deleting: boolean;
+}
 
-  function handleSubmit() {
-    submit(null, { method: "post" });
-  }
-
+export default function ErrorMessage({
+  onDelete,
+  deleting,
+}: ErrorMessageProps) {
   return (
     <Message
       heading={<>Something went wrong!</>}
@@ -21,7 +22,8 @@ export default function FormRouteError() {
       }
       buttonIcon={<Cross2Icon />}
       buttonText={<>Delete</>}
-      buttonOnClick={handleSubmit}
+      buttonOnClick={onDelete}
+      buttonDisabled={deleting}
     />
   );
 }
