@@ -65,6 +65,7 @@ export default function FormRoute() {
       />
       <Center grow="1">
         <Formity
+          key={id}
           form={data.form}
           onSubmit={handleSubmit}
           onError={handleError}
