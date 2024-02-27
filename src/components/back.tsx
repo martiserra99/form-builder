@@ -1,6 +1,7 @@
 import { useFormityForm } from "formity";
 
 import { Button } from "@radix-ui/themes";
+import useSubmitting from "src/hooks/use-submitting";
 
 interface BackProps {
   children: string; // The button text
@@ -13,8 +14,15 @@ interface BackProps {
  */
 function Back({ children }: BackProps): JSX.Element {
   const { onBack } = useFormityForm();
+  const isSubmitting = useSubmitting();
   return (
-    <Button type="button" variant="outline" size="2" onClick={onBack}>
+    <Button
+      type="button"
+      variant="outline"
+      size="2"
+      onClick={onBack}
+      disabled={isSubmitting}
+    >
       {children}
     </Button>
   );
