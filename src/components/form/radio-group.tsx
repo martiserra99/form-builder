@@ -9,7 +9,7 @@ import {
 
 import Label from "src/components/label";
 import ErrorMessage from "src/components/error-message";
-import useSubmitting from "src/hooks/use-submitting";
+import useNavigating from "src/hooks/use-navigating";
 
 interface RadioGroupProps {
   label: string; // The label for the radio group
@@ -24,7 +24,7 @@ interface RadioGroupProps {
  */
 function RadioGroup({ label, name, list }: RadioGroupProps): JSX.Element {
   const { control, formState } = useFormContext();
-  const isSubmitting = useSubmitting();
+  const isNavigating = useNavigating();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
     <Controller
@@ -41,7 +41,7 @@ function RadioGroup({ label, name, list }: RadioGroupProps): JSX.Element {
             onBlur={field.onBlur}
             onValueChange={(value) => field.onChange(value)}
             ref={field.ref}
-            disabled={isSubmitting}
+            disabled={isNavigating}
           >
             <Flex direction="column" gap="1">
               {list.map((item, index) => (
