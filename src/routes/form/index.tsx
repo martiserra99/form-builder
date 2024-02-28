@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Formity, Value } from "formity";
 import { Flex, Text } from "@radix-ui/themes";
@@ -8,38 +8,37 @@ import Center from "src/components/center";
 import useForm from "src/hooks/use-form";
 
 import Header from "./components/header";
-import SuccessMessage from "./components/success-message";
 
-import useSubmitForm from "src/hooks/use-submit-form";
 import useDeleteForm from "src/hooks/use-delete-form";
+
+import Result from "./components/result";
 
 export default function FormRoute() {
   const { id } = useParams() as { id: string };
 
   const { data } = useForm(id);
 
-  const submitForm = useSubmitForm(id);
   const deleteForm = useDeleteForm(id);
 
+  const [result, setResult] = useState<Value>(null);
+
   useEffect(() => {
-    submitForm.reset();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setResult(null);
   }, [id]);
 
-  async function handleSubmit(value: Value) {
-    await submitForm.mutateAsync(value);
+  async function handleSubmit(result: Value) {
+    setResult(result);
   }
 
   function handleDelete() {
     deleteForm.mutate();
   }
 
-  if (submitForm.isSuccess) {
+  if (result) {
     return (
-      <SuccessMessage
-        index={submitForm.data}
-        onRestart={() => submitForm.reset()}
-      />
+      <Center width="100%" height="100%">
+        <Result result={result} />
+      </Center>
     );
   }
 
