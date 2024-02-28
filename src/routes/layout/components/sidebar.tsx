@@ -45,7 +45,7 @@ function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
     <NavigationMenu.Link
       asChild
       className={classNames(
-        "px-4 py-1.5 my-2 flex justify-start text-gray-12 rounded-2 border border-transparent hover:bg-accent-4 transition-colors duration-200 ease-in-out",
+        "px-8 py-4 my-4 flex justify-start text-gray-12 rounded-2 border border-transparent hover:bg-accent-4 transition-colors duration-200 ease-in-out",
         { "bg-accent-4": active }
       )}
     >
