@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formity, Value } from "formity";
-import { Flex } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 
 import Center from "src/components/center";
 
@@ -59,5 +59,9 @@ export default function FormRoute() {
         />
       </Center>
     </Flex>
-  ) : null;
+  ) : (
+    <Center width="100%" height="100%">
+      <Text size="2">Loading...</Text>
+    </Center>
+  );
 }

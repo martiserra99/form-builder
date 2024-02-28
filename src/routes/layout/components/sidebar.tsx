@@ -27,7 +27,11 @@ export default function Sidebar() {
               ))}
             </NavigationMenu.List>
           </NavigationMenu.Root>
-        ) : null}
+        ) : (
+          <Box className="px-4">
+            <Text size="2">Loading...</Text>
+          </Box>
+        )}
       </Box>
       <Separator orientation="vertical" size="4" />
     </Flex>
