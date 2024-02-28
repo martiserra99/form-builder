@@ -12,7 +12,7 @@ export default function useCreateForm() {
     },
     onSuccess: (id: string) => {
       queryClient.invalidateQueries({ queryKey: ["forms"] });
-      navigate(`/forms/${id}`, { replace: true });
+      navigate(`/form-builder/forms/${id}`, { replace: true });
     },
   });
 }
