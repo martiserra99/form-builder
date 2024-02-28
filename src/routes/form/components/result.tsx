@@ -11,7 +11,7 @@ export default function Result({ result }: ResultProps) {
     <Card
       size="2"
       variant="surface"
-      className="w-full max-w-[420px] overflow-x-scroll"
+      className="w-full max-w-[420px] overflow-scroll"
     >
       <pre>{JSON.stringify(result, null, 2)}</pre>
     </Card>
