@@ -8,7 +8,11 @@ interface ResultProps {
 
 export default function Result({ result }: ResultProps) {
   return (
-    <Card size="3" variant="surface" className="w-full max-w-[420px]">
+    <Card
+      size="2"
+      variant="surface"
+      className="w-full max-w-[420px] overflow-x-scroll"
+    >
       <pre>{JSON.stringify(result, null, 2)}</pre>
     </Card>
   );

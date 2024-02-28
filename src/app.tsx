@@ -9,10 +9,10 @@ import ModifyFormRoute from "./routes/modify-form";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/form-builder",
     element: <LayoutRoute />,
     children: [
-      { path: "/", element: <CreateFormRoute /> },
+      { index: true, element: <CreateFormRoute /> },
       {
         path: "forms/:id",
         element: <FormRoute />,
