@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formity, Value } from "formity";
 import { Flex } from "@radix-ui/themes";
@@ -8,7 +8,6 @@ import Center from "src/components/center";
 import useForm from "src/hooks/use-form";
 
 import Header from "./components/header";
-import ErrorMessage from "./components/error-message";
 import SuccessMessage from "./components/success-message";
 
 import useSubmitForm from "src/hooks/use-submit-form";
@@ -22,8 +21,6 @@ export default function FormRoute() {
   const submitForm = useSubmitForm(id);
   const deleteForm = useDeleteForm(id);
 
-  const [error, setError] = useState<boolean>(false);
-
   useEffect(() => {
     submitForm.reset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,16 +32,6 @@ export default function FormRoute() {
 
   function handleDelete() {
     deleteForm.mutate();
-  }
-
-  function handleError() {
-    setError(true);
-  }
-
-  if (error) {
-    return (
-      <ErrorMessage onDelete={handleDelete} deleting={deleteForm.isPending} />
-    );
   }
 
   if (submitForm.isSuccess) {
@@ -68,7 +55,6 @@ export default function FormRoute() {
           key={id}
           form={data.form}
           onSubmit={handleSubmit}
-          onError={handleError}
           className="w-full max-w-[680px]"
         />
       </Center>

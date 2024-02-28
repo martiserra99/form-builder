@@ -1,16 +1,18 @@
+import { useParams } from "react-router-dom";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 import Message from "src/components/message";
+import useDeleteForm from "src/hooks/use-delete-form";
 
-interface ErrorMessageProps {
-  onDelete: () => void;
-  deleting: boolean;
-}
+export default function FormError() {
+  const { id } = useParams() as { id: string };
 
-export default function ErrorMessage({
-  onDelete,
-  deleting,
-}: ErrorMessageProps) {
+  const deleteForm = useDeleteForm(id);
+
+  async function handleDelete() {
+    await deleteForm.mutateAsync();
+  }
+
   return (
     <Message
       heading={<>Something went wrong!</>}
@@ -22,8 +24,8 @@ export default function ErrorMessage({
       }
       buttonIcon={<Cross2Icon className="w-8 h-8" />}
       buttonText={<>Delete</>}
-      buttonOnClick={onDelete}
-      buttonDisabled={deleting}
+      buttonOnClick={handleDelete}
+      buttonDisabled={deleteForm.isPending}
     />
   );
 }
