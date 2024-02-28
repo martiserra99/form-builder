@@ -18,7 +18,7 @@ export default function Message({
 }) {
   return (
     <Center height="100%">
-      <Box className="w-full max-w-[680px]">
+      <Box className="w-full max-w-[420px]">
         <Heading as="h2" align="center" mb="2">
           {heading}
         </Heading>

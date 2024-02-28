@@ -17,12 +17,12 @@ function LayoutForm({
   buttons,
 }: LayoutFormProps): JSX.Element {
   return (
-    <Card size="3" variant="surface" className="w-full max-w-[680px]">
+    <Card size="3" variant="surface" className="w-full max-w-[420px]">
       <Heading size="3" trim="both">
         {heading}
       </Heading>
-      <Separator size="4" className="mt-10 mb-8" />
-      <Flex direction="column" gap="4" className="mb-8">
+      <Separator size="4" className="mt-6 mb-4" />
+      <Flex direction="column" gap="4" className="mb-4">
         {fields}
       </Flex>
       <Grid columns={`${buttons.length}`} gap="4">

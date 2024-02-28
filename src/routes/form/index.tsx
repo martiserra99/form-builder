@@ -55,7 +55,7 @@ export default function FormRoute() {
           key={id}
           form={data.form}
           onSubmit={handleSubmit}
-          className="w-full max-w-[680px]"
+          className="w-full max-w-[420px]"
         />
       </Center>
     </Flex>

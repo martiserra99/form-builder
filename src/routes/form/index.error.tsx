@@ -22,7 +22,7 @@ export default function FormError() {
           create it again.
         </>
       }
-      buttonIcon={<Cross2Icon className="w-8 h-8" />}
+      buttonIcon={<Cross2Icon />}
       buttonText={<>Delete</>}
       buttonOnClick={handleDelete}
       buttonDisabled={deleteForm.isPending}

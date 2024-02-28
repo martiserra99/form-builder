@@ -39,7 +39,7 @@ export default function CreateFormRoute() {
     <Center className="w-full h-full">
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="w-full max-w-[680px]"
+        className="w-full max-w-[420px]"
       >
         <FormProvider {...form}>
           <LayoutForm
