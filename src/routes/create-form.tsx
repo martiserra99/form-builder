@@ -12,27 +12,32 @@ import useCreateForm from "src/hooks/use-create-form";
 
 interface FormValues {
   name: string;
-  description: string;
+  asks: string;
+  returns: string;
 }
 
 export default function CreateFormRoute() {
   const form = useForm<FormValues>({
     defaultValues: {
       name: "",
-      description: "",
+      asks: "",
+      returns: "",
     },
     resolver: yupResolver(
       yup.object().shape({
         name: yup.string().required("Required"),
-        description: yup.string().required("Required"),
+        asks: yup.string().required("Required"),
+        returns: yup.string().required("Required"),
       })
     ),
   });
 
   const createForm = useCreateForm();
 
-  async function handleSubmit(values: FormValues) {
-    await createForm.mutateAsync(values);
+  async function handleSubmit({ name, asks, returns }: FormValues) {
+    const s = (str: string) => str + (str[str.length - 1] === "." ? "" : ".");
+    const description = `Form that asks ${s(asks)} It returns ${s(returns)}`;
+    await createForm.mutateAsync({ name, description });
   }
 
   return (
@@ -52,10 +57,16 @@ export default function CreateFormRoute() {
                 placeholder="User hobbies"
               />,
               <TextArea
-                key="description"
-                name="description"
-                label="Description"
-                placeholder="Form that asks the user what are his hobbies and for each hobby it asks why he likes it."
+                key="asks"
+                name="asks"
+                label="Form that asks..."
+                placeholder="what are your hobbies and for each hobby it asks why you like it."
+              />,
+              <TextArea
+                key="returns"
+                name="returns"
+                label="It returns..."
+                placeholder="the hobbies and the reasons why you like them."
               />,
             ]}
             buttons={[<Button key="button">Create</Button>]}
