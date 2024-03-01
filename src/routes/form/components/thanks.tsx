@@ -9,7 +9,7 @@ export default function Thanks({ onBack }: { onBack: () => void }) {
       text={
         <>
           The form was correctly submitted. You can take a look at what you
-          submitted at the database.
+          submitted at the database and the console.
         </>
       }
       buttonIcon={<ResetIcon />}

@@ -34,7 +34,8 @@ export default function FormRoute() {
         submission: JSON.stringify(result),
       }),
     });
-    setSubmitted(result);
+    console.log(result);
+    setSubmitted(true);
   }
 
   function handleDelete() {
