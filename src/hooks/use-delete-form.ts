@@ -12,7 +12,7 @@ export default function useDeleteForm(id: string) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["forms"] });
-      navigate("/form-builder/", { replace: true });
+      navigate("/", { replace: true });
     },
   });
 }

@@ -12,7 +12,7 @@ export default function Sidebar() {
     <Flex direction="row" height="100%" className="w-[280px]">
       <Box p="3" grow="1">
         <Button asChild size="2" variant="surface" className="w-full">
-          <Link to="/form-builder">
+          <Link to="/">
             <PlusIcon /> New Form
           </Link>
         </Button>
@@ -22,7 +22,7 @@ export default function Sidebar() {
             <NavigationMenu.List>
               {data.map(({ id, name }) => (
                 <NavigationMenu.Item key={id}>
-                  <NavLink to={`/form-builder/forms/${id}`}>{name}</NavLink>
+                  <NavLink to={`/forms/${id}`}>{name}</NavLink>
                 </NavigationMenu.Item>
               ))}
             </NavigationMenu.List>
