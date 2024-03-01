@@ -54,7 +54,7 @@ export default function CreateFormRoute() {
                 key="name"
                 name="name"
                 label="Name"
-                placeholder="User hobbies"
+                placeholder="Hobbies"
               />,
               <TextArea
                 key="asks"

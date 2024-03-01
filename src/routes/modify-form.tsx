@@ -53,7 +53,7 @@ export default function ModifyFormRoute() {
                 key="name"
                 name="name"
                 label="Name"
-                placeholder="User hobbies"
+                placeholder="Hobbies"
               />,
               <TextArea
                 key="description"
