@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Formity, Value } from "formity";
 import { Flex, Text } from "@radix-ui/themes";
@@ -11,7 +11,9 @@ import Header from "./components/header";
 
 import useDeleteForm from "src/hooks/use-delete-form";
 
-import Result from "./components/result";
+import Thanks from "./components/thanks";
+
+import constants from "src/constants";
 
 export default function FormRoute() {
   const { id } = useParams() as { id: string };
@@ -20,26 +22,27 @@ export default function FormRoute() {
 
   const deleteForm = useDeleteForm(id);
 
-  const [result, setResult] = useState<Value>(null);
-
-  useEffect(() => {
-    setResult(null);
-  }, [id]);
+  const [submitted, setSubmitted] = useState<Value>(false);
 
   async function handleSubmit(result: Value) {
-    setResult(result);
+    await fetch(`${constants.apiUrl}/forms/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        submission: JSON.stringify(result),
+      }),
+    });
+    setSubmitted(result);
   }
 
   function handleDelete() {
     deleteForm.mutate();
   }
 
-  if (result) {
-    return (
-      <Center width="100%" height="100%">
-        <Result result={result} />
-      </Center>
-    );
+  if (submitted) {
+    return <Thanks onBack={() => setSubmitted(false)} />;
   }
 
   return data ? (
