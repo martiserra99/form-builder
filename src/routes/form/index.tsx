@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Formity, Value } from "formity";
 import { Flex, Text } from "@radix-ui/themes";
@@ -23,6 +23,10 @@ export default function FormRoute() {
   const deleteForm = useDeleteForm(id);
 
   const [submitted, setSubmitted] = useState<Value>(false);
+
+  useEffect(() => {
+    setSubmitted(false);
+  }, [id]);
 
   async function handleSubmit(result: Value) {
     await fetch(`${constants.apiUrl}/forms/submit`, {
