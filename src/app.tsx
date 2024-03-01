@@ -1,4 +1,4 @@
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import LayoutRoute from "./routes/layout";
 import CreateFormRoute from "./routes/create-form";
@@ -7,7 +7,7 @@ import FormError from "./routes/form/index.error";
 
 import ModifyFormRoute from "./routes/modify-form";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/form-builder",
     element: <LayoutRoute />,
