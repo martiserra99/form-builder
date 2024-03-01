@@ -13,7 +13,11 @@ import ErrorMessage from "src/components/error-message";
 interface RadioGroupProps {
   label: string; // The label for the radio group
   name: string; // The name of the radio group
-  list: { label: string; value: string }[]; // The list of radio buttons
+  list:
+    | { label: string; value: string }[]
+    | { label: string; value: number }[]
+    | { label: string; value: boolean }[]; // The list of radio buttons
+  type?: "string" | "number" | "boolean"; // The type of the value
 }
 
 /**
@@ -21,7 +25,12 @@ interface RadioGroupProps {
  * @param {RadioGroupProps} props The props for the radio group component
  * @returns {JSX.Element} The radio group component
  */
-function RadioGroup({ label, name, list }: RadioGroupProps): JSX.Element {
+function RadioGroup({
+  label,
+  name,
+  list,
+  type = "string",
+}: RadioGroupProps): JSX.Element {
   const { control, formState } = useFormContext();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
@@ -34,22 +43,25 @@ function RadioGroup({ label, name, list }: RadioGroupProps): JSX.Element {
             {label}
           </Label>
           <RadixRadioGroup.Root
-            size="2"
-            value={field.value}
+            value={String(field.value)}
             onBlur={field.onBlur}
-            onValueChange={(value) => field.onChange(value)}
+            onValueChange={(value) => {
+              if (type === "number") field.onChange(Number(value));
+              else if (type === "boolean") field.onChange(value === "true");
+              else field.onChange(value);
+            }}
             ref={field.ref}
           >
             <Flex direction="column" gap="1">
-              {list.map((item, index) => (
+              {list.map((item) => (
                 <Text
                   as="label"
-                  key={index}
+                  key={String(item.value)}
                   size="2"
                   {...(error && { color: "red" })}
                 >
                   <Flex gap="2">
-                    <RadixRadioGroup.Item value={item.value} />
+                    <RadixRadioGroup.Item value={String(item.value)} />
                     {item.label}
                   </Flex>
                 </Text>

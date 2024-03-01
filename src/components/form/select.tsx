@@ -7,7 +7,11 @@ import ErrorMessage from "src/components/error-message";
 interface SelectProps {
   label: string; // The label for the select
   name: string; // The name of the select
-  list: { label: string; value: string; disabled?: boolean }[]; // The list of options
+  list:
+    | { label: string; value: string }[]
+    | { label: string; value: number }[]
+    | { label: string; value: boolean }[]; // The list of options
+  type?: "string" | "number" | "boolean"; // The type of the value
 }
 
 /**
@@ -15,7 +19,12 @@ interface SelectProps {
  * @param {SelectProps} props The props for the select component
  * @returns {JSX.Element} The select component
  */
-function Select({ label, name, list }: SelectProps): JSX.Element {
+function Select({
+  label,
+  name,
+  list,
+  type = "string",
+}: SelectProps): JSX.Element {
   const { control, formState } = useFormContext();
   const error = formState.errors[name] as { message: string } | undefined;
   return (
@@ -28,9 +37,12 @@ function Select({ label, name, list }: SelectProps): JSX.Element {
             {label}
           </Label>
           <RadixSelect.Root
-            size="2"
-            value={field.value}
-            onValueChange={(value) => field.onChange(value)}
+            value={String(field.value)}
+            onValueChange={(value) => {
+              if (type === "number") field.onChange(Number(value));
+              else if (type === "boolean") field.onChange(value === "true");
+              else field.onChange(value);
+            }}
           >
             <RadixSelect.Trigger
               className="w-full"
@@ -40,9 +52,8 @@ function Select({ label, name, list }: SelectProps): JSX.Element {
             <RadixSelect.Content position="popper">
               {list.map((item) => (
                 <RadixSelect.Item
-                  key={item.value}
-                  value={item.value}
-                  disabled={item.disabled}
+                  key={String(item.value)}
+                  value={String(item.value)}
                 >
                   {item.label}
                 </RadixSelect.Item>

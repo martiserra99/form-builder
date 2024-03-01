@@ -7,7 +7,10 @@ import ErrorMessage from "src/components/error-message";
 interface CheckboxGroupProps {
   label: string; // The label for the checkbox group
   name: string; // The name of the checkbox group
-  list: { label: string; value: string }[]; // The list of checkboxes
+  list:
+    | { label: string; value: string }[]
+    | { label: string; value: number }[]
+    | { label: string; value: boolean }[]; // The list of checkboxes
 }
 
 /**
@@ -30,22 +33,24 @@ function CheckboxGroup({ label, name, list }: CheckboxGroupProps): JSX.Element {
           <Flex direction="column" gap="1">
             {list.map((item) => {
               return (
-                <Text as="label" key={item.value} size="2">
+                <Text as="label" key={String(item.value)} size="2">
                   <Flex gap="2">
                     <RadixCheckbox
                       size="2"
                       variant="surface"
-                      value={item.value}
+                      value={String(item.value)}
                       checked={field.value.includes(item.value)}
                       onCheckedChange={() => {
                         if (field.value.includes(item.value)) {
-                          const v = field.value.filter(
-                            (v: string) => v !== item.value
+                          const value = field.value.filter(
+                            (value: string | number | boolean) => {
+                              return value !== item.value;
+                            }
                           );
-                          field.onChange(v);
+                          field.onChange(value);
                         } else {
-                          const v = [...field.value, item.value];
-                          field.onChange(v);
+                          const value = [...field.value, item.value];
+                          field.onChange(value);
                         }
                       }}
                       onBlur={field.onBlur}
