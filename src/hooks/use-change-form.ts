@@ -11,7 +11,7 @@ export default function useChangeForm(id: string) {
       return changeForm(id, values.name, values.description);
     },
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: ["forms"] });
+      queryClient.invalidateQueries({ queryKey: ["forms"], exact: true });
       await queryClient.refetchQueries({ queryKey: ["forms", id] });
       navigate(`/forms/${id}`, { replace: true });
     },
